@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
     <meta charset="UTF-8">
     <title></title>
 
@@ -151,6 +151,10 @@
             background-color: blue;
         }
     </style>
+
+    <style>
+        .mySlides2 {display:none;}
+    </style>
 </head>
     <!--로고, 검색창, 로그인-->
     <header>
@@ -192,7 +196,9 @@
         <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
     <div class="news">
-        뉴스
+        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fthumb2.gettyimageskorea.com%2Fimage_preview%2F700%2F202206%2FFPL%2F1401766957.jpg&type=a340" style="width:100%; height: 450px;">
+        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1681538880649-d60945daebb3%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHw%253D%26w%3D1000%26q%3D80&type=a340" style="width:100%; height: 450px;">
+        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fthumb2.gettyimageskorea.com%2Fimage_preview%2F700%2F202303%2FFPL%2F1470284345.jpg&type=sc960_832" style="width:100%; height: 450px;">
     </div>
 
     <!--실시간 영화순위-->
@@ -235,6 +241,24 @@
             slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
         }
-        </script>
+    </script>
+    
+    
+    <script>
+        var myIndex = 0;
+        carousel();
+        
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides2");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}    
+            x[myIndex-1].style.display = "block";  
+            setTimeout(carousel, 5000); //5초마다 넘어감
+        }
+    </script>
 </body>
 </html>
