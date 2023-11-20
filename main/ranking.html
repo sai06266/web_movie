@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--전체화면 스타일-->
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            padding-left: 20%;
+            width: 60%;
+        }
+    </style>
+
+    <!--로고, 검색창, 로그인 스타일-->
+    <style>
+        .header{
+            height: 100px;
+        }
+        .header>input{
+            height: 40px;
+            width: 500px;
+            border: 1px solid;
+            border-radius: 25px;
+        }
+        input.search{
+            font-size: 16px;
+            width: 500px;
+            height: 30px;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: unset;
+            background-color: #A9F5F2;
+        }
+        button.search{
+            width: 50px;
+            height: 100%;
+            border: 0px;
+            background: #ffffff;
+            outline: none;
+            float: none;
+        }
+    </style>
+
+    <!--메뉴 스타일-->
+    <style>
+        .nav{
+            background-color: red;
+            height: 50px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        li {
+            display: inline-block;
+            width: 25%;
+            text-align: center;
+            padding: 10px;
+        }
+        li a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+
+    <!--순위 내용 스타일-->
+    <style>
+        .ranking {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .rank {
+            flex: 0 0 calc(25% - 20px); /* 한 줄에 4개의 영화를 표시하도록 조절 */
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .title {
+            white-space: normal;
+            overflow: hidden;
+        }
+        .poster {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!--로고, 검색창, 로그인-->
+    <header>
+        <div class="header">
+            <a href="index.html"><img align="center" src="image/testlogo.jpg" width="180px" height="80px"></a>
+            <input class="search" type="text" placeholder="검색어 입력" style="height: 30px;">
+            <button class="search"><img src="image/돋보기.JPG" width="30px" height="30px">검색</button>
+            <div style="float: right; margin-top: 40px">로그인/회원가입</div>
+        </div>
+    </header>
+
+    <!--메뉴-->
+    <nav>
+        <div class="nav">
+            <ul>
+                <li><a href="ranking.html">영화순위</a></li>
+                <li>장르별</li>
+                <li>영화추천</li>
+                <li>MyList</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--영화 순위 목록-->
+    <div class="ranking"></div>
+
+    <!--영화 순위 목록 불러오기-->
+    <script>
+        document.addEventListener('DOMContentLoaded', getMovieRankings);
+
+        async function getMovieRankings() {
+            try {
+                const currentDomain = window.location.origin;
+                const response = await fetch(`${currentDomain}/movie-rankings`);
+                const data = await response.json();
+                const movieList = document.querySelector('.ranking');
+                movieList.innerHTML = '';
+                const moviesToShow = data.slice(0, 19);
+
+                moviesToShow.forEach(movie => {
+                    const movieInfo = document.createElement('div');
+                    movieInfo.className = 'rank';
+                    movieInfo.innerHTML = `
+                        <p>${movie.rank}</p>
+                        <p class="title">${movie.title}</p>
+                        <img src="${movie.posterUrl}" alt="Movie Poster" class="poster">
+                    `;
+                    movieList.appendChild(movieInfo);
+                });
+                for (let i = 0; i < 4 - moviesToShow.length % 4; i++) {
+                    const emptyMovieInfo = document.createElement('div');
+                    emptyMovieInfo.className = 'rank';
+                    movieList.appendChild(emptyMovieInfo);
+                }
+            } catch (error) {
+                console.error('Error fetching movie rankings:', error);
+            }
+        }
+    </script>
+</body>
+</html>
