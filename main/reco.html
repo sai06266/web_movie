@@ -70,31 +70,56 @@
         }
     </style>
 
-    <!--순위 내용 스타일-->
+    <!--본문 스타일-->
     <style>
-        .ranking {
+        .container {
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .rank {
-            flex: 0 0 calc(25% - 20px); /* 한 줄에 4개의 영화를 표시하도록 조절 */
-            margin-bottom: 20px;
-            margin-top: 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
             text-align: center;
-            padding: 8px;
-            background-color: #f0f0f0;
         }
-        .title {
-            white-space: normal;
-            overflow: hidden;
-            height: 42px;
+
+        .hidden {
+            display: none;
         }
-        .poster {
-            width: 100%;
-            height: auto;
+
+        #quiz{
+            margin-top: 250px;
+        }
+
+        #quiz > button, select {
+            padding: 15px 25px; /* 글자 크기 조절 */
+            font-size: 20px; /* 글자 크기 조절 */
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover, select:hover {
+            background-color: #2980b9;
+            color: #fff;
+        }
+
+        select {
+            width: 220px;
+            font-size: 18px; /* 글자 크기 조절 */
+        }
+
+        h2 {
+            font-size: 24px; /* 글자 크기 조절 */
+        }
+
+        p {
+            font-size: 25px; /* 글자 크기 조절 */
         }
     </style>
+
 </head>
 <body>
     <!--로고, 검색창, 로그인-->
@@ -119,7 +144,226 @@
             </ul>
         </div>
     </nav>
-
+        <div class="container">
+            <div id="quiz">
+                <p id="question"></p>
+                <button id="yesButton" onclick="answerQuestion('yes')">예(해외영화)</button>
+                <button id="noButton" onclick="answerQuestion('no')">아니오(국내영화)</button>
+                <select id="genreSelect" class="hidden">
+                    <option value="">선택하세요</option>
+                    <option value="액션">액션 (Action)</option>
+                    <option value="전쟁">전쟁 (War)</option>
+                    <option value="공포">공포 (Horror)</option>
+                    <option value="코미디">코미디 (Comedy)</option>
+                    <option value="드라마">드라마 (Drama)</option>
+                    <option value="SF">SF (Science Fiction)</option>
+                </select>
+                <button id="genreButton" class="hidden" onclick="answerGenre()">선택</button>
+                <button id="recentButton" class="hidden" onclick="answerRecent('yes')">예(2010년 이후)</button>
+                <button id="notRecentButton" class="hidden" onclick="answerRecent('no')">아니오(2010년 이전)</button>
+            </div>
+            <div id="result" class="hidden">
+                <h2>추천하는 영화는</h2>
+                <p id="recommendation"></p>
+                <div id="poster"></div>
+                <p>포스터를 누르면 예고편으로 이동합니다!</p>
+            </div>
+        </div>
+        <script>
+            let currentQuestion = 0;
+            let userAnswers = [];
+        
+            const questions = [
+                "해외 영화를 선호하시나요?",
+                "어느 장르의 영화를 선호하시나요?",
+                "최신 영화를 선호하시나요?"
+            ];
+        
+            const recommendations = {
+                "yes": {
+                    "액션": {
+                        "yes": [
+                            {
+                                title: "존윅4",
+                                poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20230329_142%2F1680055399492ipxkq_JPEG%2Fmovie_image.jpg",
+                                cast: ["키아누 리브스", "견자단", "빌 스카스가드"],
+                                link: "https://www.youtube.com/watch?v=ly3QrgEZaQY"
+                            }
+                        ],
+                    },
+                    "전쟁": {
+                        "yes": ["해외전쟁2020"],
+                        "no": ["해외전쟁2000"]
+                    },
+                    "공포": {
+                        "yes": ["해외공포2020"],
+                        "no": ["해외공포2000"]
+                    },
+                    "코미디": {
+                        "yes": ["해외코미디2020"],
+                        "no": ["해외코미디2000"]
+                    },
+                    "드라마": {
+                        "yes": ["해외드라마2020"],
+                        "no": ["해외드라마2000"]
+                    },
+                    "SF": {
+                        "yes": ["해외SF 2020"],
+                        "no": ["해외SF 2000"]
+                    }
+                },
+                "no": {
+                    "액션": {
+                        "yes": ["국내액션2020"],
+                        "no": ["국내액션2000"]
+                    },
+                    "전쟁": {
+                        "yes": ["국내전쟁2020"],
+                        "no": ["국내전쟁2000"]
+                    },
+                    "공포": {
+                        "yes": ["국내공포2020"],
+                        "no": ["국내공포2000"]
+                    },
+                    "코미디": {
+                        "yes": ["국내코미디2020"],
+                        "no": ["국내코미디2000"]
+                    },
+                    "드라마": {
+                        "yes": ["국내드라마2020"],
+                        "no": ["국내드라마2000"]
+                    },
+                    "SF": {
+                        "yes": ["국내SF 2020"],
+                        "no": ["국내SF 2000"]
+                    }
+                }
+            };
+        
+            function startQuiz() {
+                document.getElementById("quiz").classList.remove("hidden");
+                showQuestion();
+            }
+        
+            function showQuestion() {
+                const questionElement = document.getElementById("question");
+                questionElement.innerText = questions[currentQuestion];
+        
+                const yesButton = document.getElementById("yesButton");
+                const noButton = document.getElementById("noButton");
+                const genreSelect = document.getElementById("genreSelect");
+                const genreButton = document.getElementById("genreButton");
+                const recentButton = document.getElementById("recentButton");
+                const notRecentButton = document.getElementById("notRecentButton");
+        
+                if (currentQuestion === 0) {
+                    yesButton.classList.remove("hidden");
+                    noButton.classList.remove("hidden");
+                    genreSelect.classList.add("hidden");
+                    genreButton.classList.add("hidden");
+                    recentButton.classList.add("hidden");
+                    notRecentButton.classList.add("hidden");
+                } else if (currentQuestion === 1) {
+                    yesButton.classList.add("hidden");
+                    noButton.classList.add("hidden");
+                    genreSelect.classList.remove("hidden");
+                    genreButton.classList.remove("hidden");
+                    recentButton.classList.add("hidden");
+                    notRecentButton.classList.add("hidden");
+                } else if (currentQuestion === 2) {
+                    yesButton.classList.add("hidden");
+                    noButton.classList.add("hidden");
+                    genreSelect.classList.add("hidden");
+                    genreButton.classList.add("hidden");
+                    recentButton.classList.remove("hidden");
+                    notRecentButton.classList.remove("hidden");
+                }
+            }
+        
+            function answerQuestion(answer) {
+                userAnswers.push(answer);
+        
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }
+        
+            function answerGenre() {
+                const selectedGenre = document.getElementById("genreSelect").value;
+                userAnswers.push(selectedGenre);
+        
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }
+        
+            function answerRecent(answer) {
+                userAnswers.push(answer);
+        
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }
+        
+            function showResult() {
+                const userResult = getUserResult();
+                const posterElement = document.getElementById("poster");
+    
+                if (userResult.includes("추천할 영화가 없습니다.")) {
+                    // 추천할 영화가 없을 경우
+                    posterElement.style.display = "none";
+                } else {
+                    // 추천할 영화가 있을 경우
+                    posterElement.style.display = "block"; 
+                    const selectedMovie = getUserResult();
+                    const movieInfoElement = document.getElementById("recommendation");
+                    movieInfoElement.innerHTML = selectedMovie;
+    
+                    // 포스터 업데이트
+                    posterElement.src = selectedMovie.poster;
+                }
+    
+                document.getElementById("quiz").classList.add("hidden");
+                document.getElementById("result").classList.remove("hidden");
+            }
+        
+            function getUserResult() {
+                const userPreference = userAnswers[0];
+                const userGenre = userAnswers[1];
+                const userRecent = userAnswers[2];
+    
+                // 선택된 영화 목록
+                const selectedMovies = recommendations[userPreference]?.[userGenre]?.[userRecent];
+    
+                // 선택된 영화 목록이 없거나 비어있는 경우
+                if (!selectedMovies || selectedMovies.length === 0) {
+                    return "추천할 영화가 없습니다.";
+                }
+    
+                const randomIndex = Math.floor(Math.random() * selectedMovies.length);
+                const selectedMovie = selectedMovies[randomIndex];
+    
+                // 영화 정보를 표시
+                const movieInfo = `
+                    <${selectedMovie.title}> <br>
+                    출연진: ${selectedMovie.cast.join(", ")} <br>
+                    <a href="${selectedMovie.link}" target="_blank">
+                    <img src="${selectedMovie.poster}" width="400px"></a>
+                `;
+    
+                return movieInfo;
+            }
+            startQuiz();
+        </script>
 
 </body>
 </html>
