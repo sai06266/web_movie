@@ -120,41 +120,6 @@
         </div>
     </nav>
 
-    <!--영화 순위 목록-->
-    <div class="ranking"></div>
 
-    <!--영화 순위 목록 불러오기-->
-    <script>
-        document.addEventListener('DOMContentLoaded', getMovieRankings);
-
-        async function getMovieRankings() {
-            try {
-                const currentDomain = window.location.origin;
-                const response = await fetch(`${currentDomain}/movie-rankings`);
-                const data = await response.json();
-                const movieList = document.querySelector('.ranking');
-                movieList.innerHTML = '';
-                const moviesToShow = data.slice(0, 19);
-
-                moviesToShow.forEach(movie => {
-                    const movieInfo = document.createElement('div');
-                    movieInfo.className = 'rank';
-                    movieInfo.innerHTML = `
-                        <p>${movie.rank}</p>
-                        <p class="title">${movie.title}</p>
-                        <img src="${movie.posterUrl}" alt="Movie Poster" class="poster">
-                    `;
-                    movieList.appendChild(movieInfo);
-                });
-                for (let i = 0; i < 4 - moviesToShow.length % 4; i++) {
-                    const emptyMovieInfo = document.createElement('div');
-                    emptyMovieInfo.className = 'rank';
-                    movieList.appendChild(emptyMovieInfo);
-                }
-            } catch (error) {
-                console.error('Error fetching movie rankings:', error);
-            }
-        }
-    </script>
 </body>
 </html>
