@@ -158,87 +158,83 @@
 
     <!--메인화면-->
     <div class="main">
-    <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-        <button class="btn" onclick="filterSelection('horror')"> 공포 영화</button>
-        <button class="btn" onclick="filterSelection('cars')"> 코미디 영화</button>
-        <button class="btn" onclick="filterSelection('people')"> People</button>
-    </div>
-
-    <!-- Portfolio Gallery Grid -->
-    <div class="row">
-        <div class="column horror">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>공포영화 1</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
-        </div>
-        <div class="column horror">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>공포영화 2</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
-        </div>
-        <div class="column horror">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>공포영화 3</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
-        </div>
-        
-        <div class="column cars">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Retro</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
-        </div>
-        <div class="column cars">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Fast</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
-        </div>
-        <div class="column cars">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Classic</h4>
-                <p>Lorem ipsum dolor..</p>
-            </div>
+        <div id="myBtnContainer">
+            <button class="btn active" onclick="filterSelection('all')"> 모두</button>
+            <button class="btn" onclick="filterSelection('horror')"> 공포 영화</button>
+            <button class="btn" onclick="filterSelection('comedy')"> 코미디 영화</button>
+            <button class="btn" onclick="filterSelection('action')"> 액션 영화</button>
         </div>
 
-        <div class="column people">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Girl</h4>
-                <p>Lorem ipsum dolor..</p>
+        <div class="row">
+            <div class="column horror">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>공포영화 1</h4>
+                    <p>출연진: </p>
+                </div>
             </div>
-        </div>
-        <div class="column people">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Man</h4>
-                <p>Lorem ipsum dolor..</p>
+            <div class="column horror">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>공포영화 2</h4>
+                    <p>출연진: </p>
+                </div>
             </div>
-        </div>
-        <div class="column people">
-            <div class="content">
-                <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
-                <h4>Woman</h4>
-                <p>Lorem ipsum dolor..</p>
+            <div class="column horror">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>공포영화 3</h4>
+                    <p>출연진: </p>
+                </div>
             </div>
-        </div>
-    <!-- END GRID -->
-    </div>
+            
+            <div class="column comedy">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>코미디영화 1</h4>
+                    <p>출연진: </p>
+                </div>
+            </div>
+            <div class="column comedy">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>코미디영화 2</h4>
+                    <p>출연진: </p>
+                </div>
+            </div>
+            <div class="column comedy">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>코미디영화 3</h4>
+                    <p>출연진: </p>
+                </div>
+            </div>
 
-    <!-- END MAIN -->
+            <div class="column comedy">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>코미디영화 4</h4>
+                    <p>출연진: </p>
+                </div>
+            </div>
+            <div class="column action">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>액션영화 1</h4>
+                    <p>출연진: </p>
+                </div>
+            </div>
+            <div class="column action">
+                <div class="content">
+                    <img src="https://picsum.photos/250/250" alt="Mountains" style="width:100%">
+                    <h4>액션영화 2</h4>
+                    <p>L출연진: </p>
+                </div>
+            </div>
+        </div>
     </div>
     
-
+    <!--메인화면-->
     <script>
         filterSelection("all")
         function filterSelection(c) {
