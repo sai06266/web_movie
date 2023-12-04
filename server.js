@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 // 정적 파일 제공
 app.use(express.static(path.join(__dirname, 'main')));
 
-// 영화 순위 엔드포인트
+// 영화 순위 
 app.get('/movie-rankings', (req, res) => {
     const url = 'http://www.cgv.co.kr/movies/?lt=1&ft=0';
 
@@ -31,7 +31,7 @@ app.get('/movie-rankings', (req, res) => {
                 movies.push(movie);
             });
 
-            // 특정 등수까지의 정보만 클라이언트로 전달
+            // 19등까지의 정보만 클라이언트로 전달
             const moviesToSend = movies.slice(0, 19);
 
             res.json(moviesToSend);
