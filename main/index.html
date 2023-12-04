@@ -72,10 +72,6 @@
 
     <!--본문 스타일-->
     <style>
-        .main1{
-            background-color: green;
-            height: 300px;
-        }
         .main2{
             margin-top: 460px;
             width: 100%;
@@ -88,14 +84,14 @@
 
     </style>
 
-    <!--포스터 이미지 슬라이드-->
+    <!--예고편 슬라이드-->
     <style>
         * {box-sizing: border-box}
         .mySlides {display: none}
         
         /* Slideshow container */
         .slideshow-container {
-            width: 70%;
+            width: 73%;
             height: auto;
             position: relative;
             float: left;
@@ -144,15 +140,17 @@
         }
     </style>
     
-    <!--뉴스 부분-->
+    <!--포스터 부분-->
     <style>
         .news{
-            height: 450px;
-            width: 30%;
+            height: 470px;
+            width: 27%;
             float: right;
-            background-color: blue;
         }
-        .mySlides2 {display:none;}
+        .mySlides2 {
+            display:none;
+            height: 470px;
+        }
     </style>
     
     <!--영화 순위 부분-->
@@ -199,32 +197,40 @@
         </div>
     </nav>
 
-    <!-- Slideshow container -->
+    <!--예고편 슬라이드-->
     <div class="slideshow-container">
 
         <div class="mySlides fade">
-            <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.utoimage.com%2Fpreview%2Fcp996406%2F2023%2F09%2F202309004664_800.jpg&type=sc960_832" style="width:100%; height:450px">
+            <video width="100%" height="470" controls autoplay muted>
+                <source src="https://adimg.cgv.co.kr/images/202311/Saw/1124_1080x608.mp4" type="video/mp4">
+            </video>
         </div>
         
         <div class="mySlides fade">
-            <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjZfNjkg%2FMDAxNjY5NDQ0ODA4OTAw.kkmokpXLlLvN7GmjRiAk9qW05SPeyjLEVo6xT0vPYp8g.f7rDxp07V1ss5sCyzVbGWM7aQUGZIukrFxaoIrzyOd4g.JPEG.sinvi640%2F1669444635164.jpg&type=sc960_832" style="width:100%; height:450px">
-        </div>
-        
+            <video width="100%" height="470" controls autoplay muted>
+                <source src="http://h.vod.cgv.co.kr:80/vodCGVa/87554/87554_220955_1200_128_960_540.mp4" deletecommandtype="video/mp4">        </div>
+            </video>
         <div class="mySlides fade">
-            <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1672717276064-46cc0d099c9a%3Fixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%253D%26w%3D1000%26q%3D80&type=sc960_832" style="width:100%; height:450px">
+            <video width="100%" height="470" controls autoplay muted>
+                <source src="https://adimg.cgv.co.kr/images/202311/OurSeason/OurSeason_1080x608_PC.mp4" type="video/mp4">
+            </video>        
+        </div>
+        <div class="mySlides fade">
+            <video width="100%" height="470" controls autoplay muted>
+                <source src="https://adimg.cgv.co.kr/images/202311/Dotty/1204_Dotty_1080x608_PC.mp4" type="video/mp4">
+            </video>        
         </div>
         <a class="prev" onclick="plusSlides(-1)">❮</a>
         <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
     <div class="news">
-        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fthumb2.gettyimageskorea.com%2Fimage_preview%2F700%2F202206%2FFPL%2F1401766957.jpg&type=a340" style="width:100%; height: 450px;">
-        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1681538880649-d60945daebb3%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHw%253D%26w%3D1000%26q%3D80&type=a340" style="width:100%; height: 450px;">
-        <img class="mySlides2" src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fthumb2.gettyimageskorea.com%2Fimage_preview%2F700%2F202303%2FFPL%2F1470284345.jpg&type=sc960_832" style="width:100%; height: 450px;">
+        <img class="mySlides2" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87716/87716_320.jpg" style="width:100%;">
+        <img class="mySlides2" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84945/84945_320.jpg" style="width:100%;">
+        <img class="mySlides2" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000087/87777/87777_320.jpg" style="width:100%;">
     </div>
 
     <!--실시간 영화순위-->
     <div class="main2">
-
     </div>
 
     <!--신규 영화-->
@@ -232,19 +238,21 @@
         신규 영화 목록
     </div>
 
-    <!--이미지 슬라이드-->
+    <!--예고편 슬라이드-->
     <script>
         let slideIndex = 1;
-            showSlides(slideIndex);
-        
+        showSlides(slideIndex);
+    
         function plusSlides(n) {
+            pauseVideo(); // 추가: 이미지 전환 시 비디오 일시 중지
             showSlides(slideIndex += n);
         }
-        
+    
         function currentSlide(n) {
+            pauseVideo(); // 추가: 이미지 전환 시 비디오 일시 중지
             showSlides(slideIndex = n);
         }
-        
+    
         function showSlides(n) {
             let i;
             let slides = document.getElementsByClassName("mySlides");
@@ -260,9 +268,16 @@
             slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
         }
+    
+        function pauseVideo() {
+            let videos = document.getElementsByTagName("video");
+            for (let i = 0; i < videos.length; i++) {
+                videos[i].pause();
+            }
+        }
     </script>
     
-    <!--뉴스 부분-->
+    <!--포스터 부분-->
     <script>
         var myIndex = 0;
         carousel();
