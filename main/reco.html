@@ -144,226 +144,333 @@
             </ul>
         </div>
     </nav>
-        <div class="container">
-            <div id="quiz">
-                <p id="question"></p>
-                <button id="yesButton" onclick="answerQuestion('yes')">예(해외영화)</button>
-                <button id="noButton" onclick="answerQuestion('no')">아니오(국내영화)</button>
-                <select id="genreSelect" class="hidden">
-                    <option value="">선택하세요</option>
-                    <option value="액션">액션 (Action)</option>
-                    <option value="전쟁">전쟁 (War)</option>
-                    <option value="공포">공포 (Horror)</option>
-                    <option value="코미디">코미디 (Comedy)</option>
-                    <option value="드라마">드라마 (Drama)</option>
-                    <option value="SF">SF (Science Fiction)</option>
-                </select>
-                <button id="genreButton" class="hidden" onclick="answerGenre()">선택</button>
-                <button id="recentButton" class="hidden" onclick="answerRecent('yes')">예(2010년 이후)</button>
-                <button id="notRecentButton" class="hidden" onclick="answerRecent('no')">아니오(2010년 이전)</button>
-            </div>
-            <div id="result" class="hidden">
-                <h2>추천하는 영화는</h2>
-                <p id="recommendation"></p>
-                <div id="poster"></div>
-                <p>포스터를 누르면 예고편으로 이동합니다!</p>
-            </div>
+    <div class="container">
+        <div id="quiz">
+            <p id="question"></p>
+            <button id="yesButton" onclick="answerQuestion('yes')">예(해외영화)</button>
+            <button id="noButton" onclick="answerQuestion('no')">아니오(국내영화)</button>
+            <select id="genreSelect" class="hidden">
+                <option value="">선택하세요</option>
+                <option value="액션">액션 (Action)</option>
+                <option value="전쟁">전쟁 (War)</option>
+                <option value="공포">공포 (Horror)</option>
+                <option value="코미디">코미디 (Comedy)</option>
+                <option value="드라마">드라마 (Drama)</option>
+                <option value="SF">SF (Science Fiction)</option>
+            </select>
+            <button id="genreButton" class="hidden" onclick="answerGenre()">선택</button>
+            <button id="recentButton" class="hidden" onclick="answerRecent('yes')">예(2010년 이후)</button>
+            <button id="notRecentButton" class="hidden" onclick="answerRecent('no')">아니오(2010년 이전)</button>
         </div>
-        <script>
-            let currentQuestion = 0;
-            let userAnswers = [];
-        
-            const questions = [
-                "해외 영화를 선호하시나요?",
-                "어느 장르의 영화를 선호하시나요?",
-                "최신 영화를 선호하시나요?"
-            ];
-        
-            const recommendations = {
-                "yes": {
-                    "액션": {
-                        "yes": [
-                            {
-                                title: "존윅4",
-                                poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20230329_142%2F1680055399492ipxkq_JPEG%2Fmovie_image.jpg",
-                                cast: ["키아누 리브스", "견자단", "빌 스카스가드"],
-                                link: "https://www.youtube.com/watch?v=ly3QrgEZaQY"
-                            }
-                        ],
-                    },
-                    "전쟁": {
-                        "yes": ["해외전쟁2020"],
-                        "no": ["해외전쟁2000"]
-                    },
-                    "공포": {
-                        "yes": ["해외공포2020"],
-                        "no": ["해외공포2000"]
-                    },
-                    "코미디": {
-                        "yes": ["해외코미디2020"],
-                        "no": ["해외코미디2000"]
-                    },
-                    "드라마": {
-                        "yes": ["해외드라마2020"],
-                        "no": ["해외드라마2000"]
-                    },
-                    "SF": {
-                        "yes": ["해외SF 2020"],
-                        "no": ["해외SF 2000"]
-                    }
+        <div id="result" class="hidden">
+            <h2>추천하는 영화는</h2>
+            <p id="recommendation"></p>
+            <div id="poster"></div>
+            <p>포스터를 누르면 예고편으로 이동합니다!</p>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let userAnswers = [];
+    
+        const questions = [
+            "해외 영화를 선호하시나요?",
+            "어느 장르의 영화를 선호하시나요?",
+            "최신 영화를 선호하시나요?"
+        ];
+    
+        const recommendations = {
+            "yes": {
+                "액션": {
+                    "yes": [
+                        {
+                            title: "존윅4",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20230329_142%2F1680055399492ipxkq_JPEG%2Fmovie_image.jpg",
+                            cast: ["키아누 리브스", "견자단", "빌 스카스가드"],
+                            link: "https://www.youtube.com/watch?v=ly3QrgEZaQY"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "아바타",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20180518_218%2F1526609377997LxLgL_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["샘 워싱턴", "조 샐다나", "시고니 위버"],
+                            link: "https://youtube.com/watch?v=vg_SfVAIytk"
+                        }
+                    ]
                 },
-                "no": {
-                    "액션": {
-                        "yes": ["국내액션2020"],
-                        "no": ["국내액션2000"]
-                    },
-                    "전쟁": {
-                        "yes": ["국내전쟁2020"],
-                        "no": ["국내전쟁2000"]
-                    },
-                    "공포": {
-                        "yes": ["국내공포2020"],
-                        "no": ["국내공포2000"]
-                    },
-                    "코미디": {
-                        "yes": ["국내코미디2020"],
-                        "no": ["국내코미디2000"]
-                    },
-                    "드라마": {
-                        "yes": ["국내드라마2020"],
-                        "no": ["국내드라마2000"]
-                    },
-                    "SF": {
-                        "yes": ["국내SF 2020"],
-                        "no": ["국내SF 2000"]
-                    }
+                "전쟁": {
+                    "yes": [
+                        {
+                            title: "호텔 뭄바이",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20190415_275%2F1555310081472MmN8D_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["데브 파텔", "아미 해머", "나자닌 보니아디"],
+                            link: "https://www.youtube.com/watch?v=pkoFwyESk44"  
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "퇴마전: 마령검의 비밀",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20150821_200%2F1440143971670JajTs_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["리빙빙", "천쿤", "조문선"],
+                            link: "https://tv.naver.com/v/499060"
+                        }
+                    ]
+                },
+                "공포": {
+                    "yes": [
+                        {
+                            title: "겟 아웃",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20170512_76%2F1494564316131VmHQY_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["다니엘 칼루야", "앨리슨 윌리암스", "브래드리 휘트포드"],
+                            link: "https://www.youtube.com/watch?v=5-H7DpEBZGo"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "사일런트 힐",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111221_101%2F1324458899453nsEUH_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["라다 마첼", "로리 홀든", "숀 빈"],
+                            link: "https://www.youtube.com/watch?v=0ECw3ZCrZ_U"
+                        }
+                    ]
+                },
+                "코미디": {
+                    "yes": [
+                        {
+                            title: "인사이드 아웃",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20150714_216%2F14368354197498c2rS_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["에이미 포엘러", "필리스 스미스", "민디 캘링"],
+                            link: "https://www.youtube.com/watch?v=1KGZtWbZtq8"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "캐치 미 이프 유 캔",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111223_268%2F1324578798861g8uPt_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["레오나르도 디카프리오", "톰 행크스", "크리스토퍼 월켄"],
+                            link: "https://tv.naver.com/v/5685332"
+                        }
+                    ]
+                },
+                "드라마": {
+                    "yes": [
+                        {
+                            title: "라라랜드",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20201229_146%2F1609226288425JgdsP_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["라이언 고슬링", "엠마 스톤", "존 레전드"],
+                            link: "https://www.youtube.com/watch?v=Dt5hFexM5BI"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "노트북",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20201102_233%2F1604294237347ur4pS_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["라이언 고슬링", "레이첼 맥 아담스", "제나 로우랜즈"],
+                            link: "https://www.youtube.com/watch?v=AF4IzD6aVU4"
+                        }
+                    ]
+                },
+                "SF": {
+                    "yes": [
+                        {
+                            title: "인셉션",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20230405_194%2F1680663356900xqi3A_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["레오나르도 디카프리오", "와타나베 켄", "조셉 고든 레빗"],
+                            link: "https://youtube.com/watch?v=mucmHmjU9YE"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "우주전쟁",
+                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111222_113%2F1324507054744va9qe_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            cast: ["톰 크루즈", "저스틴 채트윈", "다코타 패닝"],
+                            link: "https://www.youtube.com/watch?v=dqOvTctDUYs"
+                        }
+                    ]
                 }
-            };
-        
-            function startQuiz() {
-                document.getElementById("quiz").classList.remove("hidden");
+            },
+            "no": {
+                "액션": {
+                    "yes": [
+                        {
+                            title: "부산행",
+                            poster: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160716_172%2Fbonvelyyy_14686416582362RiDM_JPEG%2F%25BA%25CE%25BB%25EA%25C7%25E0-1.jpg&type=sc960_832",
+                            cast: ["공유", "정유미", "마동석"],
+                            link: "https://www.youtube.com/watch?v=UOTOjA0ngmk"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "올드보이",
+                            poster: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTdfOTAg%2FMDAxNjE4NjQxMTUzMzE2.i_qJoCDhwugTiKVyCLEslk9jzDMaMkRewxMk0vRL3vcg.6Za2WwHN3GEFVfSRrGwSmIgc9CMBsA7jd2He6MQNrisg.JPEG.pjw3146%2F%25BF%25C3%25B5%25E5%25BA%25B8%25C0%25CC.jpg&type=sc960_832",
+                            cast: ["최민식", "유지태", "강혜정"],
+                            link: "https://www.youtube.com/watch?v=2sw4svjRe_I"
+                        }
+                    ]
+                },
+                "전쟁": {
+                    "yes": [
+                        {
+                            title: "암살",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150713_74%2F14367488229802tA3J_JPEG%2Fmovie_image.jpg",
+                            cast: ["전지현", "이정재", "하정우"],
+                            link: "https://www.youtube.com/watch?v=RnGxpZ75zFU"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "태극기 휘날리며",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20210303_44%2F1614738149021SyVpA_JPEG%2Fmovie_image.jpg",
+                            cast: ["장동건", "원빈", "이은주"],
+                            link: "https://www.youtube.com/watch?v=Pb8IhwKp-Zk"
+                        }
+                    ]
+                },
+                "공포": {
+                    "yes": ["국내공포2020"],
+                    "no": ["국내공포2000"]
+                },
+                "코미디": {
+                    "yes": ["국내코미디2020"],
+                    "no": ["국내코미디2000"]
+                },
+                "드라마": {
+                    "yes": ["국내드라마2020"],
+                    "no": ["국내드라마2000"]
+                },
+                "SF": {
+                    "yes": ["국내SF 2020"],
+                    "no": ["국내SF 2000"]
+                }
+            }
+        };
+    
+        function startQuiz() {
+            document.getElementById("quiz").classList.remove("hidden");
+            showQuestion();
+        }
+    
+        function showQuestion() {
+            const questionElement = document.getElementById("question");
+            questionElement.innerText = questions[currentQuestion];
+    
+            const yesButton = document.getElementById("yesButton");
+            const noButton = document.getElementById("noButton");
+            const genreSelect = document.getElementById("genreSelect");
+            const genreButton = document.getElementById("genreButton");
+            const recentButton = document.getElementById("recentButton");
+            const notRecentButton = document.getElementById("notRecentButton");
+    
+            if (currentQuestion === 0) {
+                yesButton.classList.remove("hidden");
+                noButton.classList.remove("hidden");
+                genreSelect.classList.add("hidden");
+                genreButton.classList.add("hidden");
+                recentButton.classList.add("hidden");
+                notRecentButton.classList.add("hidden");
+            } else if (currentQuestion === 1) {
+                yesButton.classList.add("hidden");
+                noButton.classList.add("hidden");
+                genreSelect.classList.remove("hidden");
+                genreButton.classList.remove("hidden");
+                recentButton.classList.add("hidden");
+                notRecentButton.classList.add("hidden");
+            } else if (currentQuestion === 2) {
+                yesButton.classList.add("hidden");
+                noButton.classList.add("hidden");
+                genreSelect.classList.add("hidden");
+                genreButton.classList.add("hidden");
+                recentButton.classList.remove("hidden");
+                notRecentButton.classList.remove("hidden");
+            }
+        }
+    
+        function answerQuestion(answer) {
+            userAnswers.push(answer);
+    
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
                 showQuestion();
+            } else {
+                showResult();
             }
-        
-            function showQuestion() {
-                const questionElement = document.getElementById("question");
-                questionElement.innerText = questions[currentQuestion];
-        
-                const yesButton = document.getElementById("yesButton");
-                const noButton = document.getElementById("noButton");
-                const genreSelect = document.getElementById("genreSelect");
-                const genreButton = document.getElementById("genreButton");
-                const recentButton = document.getElementById("recentButton");
-                const notRecentButton = document.getElementById("notRecentButton");
-        
-                if (currentQuestion === 0) {
-                    yesButton.classList.remove("hidden");
-                    noButton.classList.remove("hidden");
-                    genreSelect.classList.add("hidden");
-                    genreButton.classList.add("hidden");
-                    recentButton.classList.add("hidden");
-                    notRecentButton.classList.add("hidden");
-                } else if (currentQuestion === 1) {
-                    yesButton.classList.add("hidden");
-                    noButton.classList.add("hidden");
-                    genreSelect.classList.remove("hidden");
-                    genreButton.classList.remove("hidden");
-                    recentButton.classList.add("hidden");
-                    notRecentButton.classList.add("hidden");
-                } else if (currentQuestion === 2) {
-                    yesButton.classList.add("hidden");
-                    noButton.classList.add("hidden");
-                    genreSelect.classList.add("hidden");
-                    genreButton.classList.add("hidden");
-                    recentButton.classList.remove("hidden");
-                    notRecentButton.classList.remove("hidden");
-                }
+        }
+    
+        function answerGenre() {
+            const selectedGenre = document.getElementById("genreSelect").value;
+            userAnswers.push(selectedGenre);
+    
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
             }
-        
-            function answerQuestion(answer) {
-                userAnswers.push(answer);
-        
-                if (currentQuestion < questions.length - 1) {
-                    currentQuestion++;
-                    showQuestion();
-                } else {
-                    showResult();
-                }
+        }
+    
+        function answerRecent(answer) {
+            userAnswers.push(answer);
+    
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
             }
-        
-            function answerGenre() {
-                const selectedGenre = document.getElementById("genreSelect").value;
-                userAnswers.push(selectedGenre);
-        
-                if (currentQuestion < questions.length - 1) {
-                    currentQuestion++;
-                    showQuestion();
-                } else {
-                    showResult();
-                }
+        }
+    
+        function showResult() {
+            const userResult = getUserResult();
+            const posterElement = document.getElementById("poster");
+
+            if (userResult.includes("추천할 영화가 없습니다.")) {
+                // 추천할 영화가 없을 경우
+                posterElement.style.display = "none";
+            } else {
+                // 추천할 영화가 있을 경우
+                posterElement.style.display = "block"; 
+                const selectedMovie = getUserResult();
+                const movieInfoElement = document.getElementById("recommendation");
+                movieInfoElement.innerHTML = selectedMovie;
+
+                // 포스터 업데이트
+                posterElement.src = selectedMovie.poster;
             }
-        
-            function answerRecent(answer) {
-                userAnswers.push(answer);
-        
-                if (currentQuestion < questions.length - 1) {
-                    currentQuestion++;
-                    showQuestion();
-                } else {
-                    showResult();
-                }
+
+            document.getElementById("quiz").classList.add("hidden");
+            document.getElementById("result").classList.remove("hidden");
+        }
+    
+        function getUserResult() {
+            const userPreference = userAnswers[0];
+            const userGenre = userAnswers[1];
+            const userRecent = userAnswers[2];
+
+            // 선택된 영화 목록
+            const selectedMovies = recommendations[userPreference]?.[userGenre]?.[userRecent];
+
+            // 선택된 영화 목록이 없거나 비어있는 경우
+            if (!selectedMovies || selectedMovies.length === 0) {
+                return "추천할 영화가 없습니다.";
             }
-        
-            function showResult() {
-                const userResult = getUserResult();
-                const posterElement = document.getElementById("poster");
-    
-                if (userResult.includes("추천할 영화가 없습니다.")) {
-                    // 추천할 영화가 없을 경우
-                    posterElement.style.display = "none";
-                } else {
-                    // 추천할 영화가 있을 경우
-                    posterElement.style.display = "block"; 
-                    const selectedMovie = getUserResult();
-                    const movieInfoElement = document.getElementById("recommendation");
-                    movieInfoElement.innerHTML = selectedMovie;
-    
-                    // 포스터 업데이트
-                    posterElement.src = selectedMovie.poster;
-                }
-    
-                document.getElementById("quiz").classList.add("hidden");
-                document.getElementById("result").classList.remove("hidden");
-            }
-        
-            function getUserResult() {
-                const userPreference = userAnswers[0];
-                const userGenre = userAnswers[1];
-                const userRecent = userAnswers[2];
-    
-                // 선택된 영화 목록
-                const selectedMovies = recommendations[userPreference]?.[userGenre]?.[userRecent];
-    
-                // 선택된 영화 목록이 없거나 비어있는 경우
-                if (!selectedMovies || selectedMovies.length === 0) {
-                    return "추천할 영화가 없습니다.";
-                }
-    
-                const randomIndex = Math.floor(Math.random() * selectedMovies.length);
-                const selectedMovie = selectedMovies[randomIndex];
-    
-                // 영화 정보를 표시
-                const movieInfo = `
-                    <${selectedMovie.title}> <br>
-                    출연진: ${selectedMovie.cast.join(", ")} <br>
-                    <a href="${selectedMovie.link}" target="_blank">
-                    <img src="${selectedMovie.poster}" width="400px"></a>
-                `;
-    
-                return movieInfo;
-            }
-            startQuiz();
-        </script>
+
+            const randomIndex = Math.floor(Math.random() * selectedMovies.length);
+            const selectedMovie = selectedMovies[randomIndex];
+
+            // 영화 정보를 표시
+            const movieInfo = `
+                <${selectedMovie.title}> <br>
+                출연진: ${selectedMovie.cast.join(", ")} <br>
+                <a href="${selectedMovie.link}" target="_blank">
+                <img src="${selectedMovie.poster}" width="400px"></a>
+            `;
+
+            return movieInfo;
+        }
+        startQuiz();
+    </script>
 
 </body>
 </html>
