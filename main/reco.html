@@ -6,10 +6,11 @@
     <!--전체화면 스타일-->
     <style>
         body{
-            margin: 0;
-            padding: 0;
+            margin: 10px;
             padding-left: 20%;
-            width: 60%;
+            width: 59%;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBP6v-xTdW0i7JOjjgrU9uz_jPpFIT6rQyCw&usqp=CAU");
+
         }
     </style>
 
@@ -19,35 +20,32 @@
             height: 100px;
         }
         .header>input{
-            height: 40px;
-            width: 500px;
-            border: 1px solid;
             border-radius: 25px;
+            vertical-align: middle;
+        }
+        .header > a{
+            color: black;
+            text-decoration: none;
         }
         input.search{
             font-size: 16px;
             width: 500px;
-            height: 30px;
             padding: 10px;
             border: 0px;
             outline: none;
             float: unset;
-            background-color: #A9F5F2;
         }
-        button.search{
+        #search{
+            vertical-align: middle;
             width: 50px;
-            height: 100%;
-            border: 0px;
-            background: #ffffff;
-            outline: none;
-            float: none;
+            height: 50px;
         }
     </style>
 
     <!--메뉴 스타일-->
     <style>
         .nav{
-            background-color: red;
+            background-color: #D0A9F5;
             height: 50px;
         }
         ul {
@@ -61,8 +59,14 @@
         li {
             display: inline-block;
             width: 20%;
+            height: 30px;
             text-align: center;
             padding: 10px;
+            text-decoration: none;
+            color:black;
+        }
+        li:hover{
+            background-color: #58FAD0;
         }
         li a {
             color: black;
@@ -77,7 +81,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
             text-align: center;
         }
 
@@ -108,15 +111,26 @@
 
         select {
             width: 220px;
-            font-size: 18px; /* 글자 크기 조절 */
+            font-size: 18px; 
         }
 
         h2 {
-            font-size: 24px; /* 글자 크기 조절 */
+            font-size: 24px; 
         }
 
         p {
-            font-size: 25px; /* 글자 크기 조절 */
+            font-size: 25px; 
+        }
+
+        #result{
+            margin-top: 30px;
+            border: 10px solid black;
+            border-radius: 10px;
+            width: 80%;
+        }
+
+        .posterimg {
+            margin-top: 20px;
         }
     </style>
 
@@ -125,10 +139,10 @@
     <!--로고, 검색창, 로그인-->
     <header>
         <div class="header">
-            <a href="index.html"><img align="center" src="image/testlogo.jpg" width="180px" height="80px"></a>
+            <a href="index.html"><img align="center" src="image/logo.png" width="90px" height="80px"></a>
             <input class="search" type="text" placeholder="검색어 입력" style="height: 30px;">
-            <button class="search"><img src="image/돋보기.JPG" width="30px" height="30px">검색</button>
-            <div style="float: right; margin-top: 40px">로그인/회원가입</div>
+            <img id="search" src="image/search.png" width="30px" height="30px">
+            <a href="login.html"><div style="float: right; margin-top: 40px">로그인/회원가입</div></a>
         </div>
     </header>
 
@@ -144,6 +158,8 @@
             </ul>
         </div>
     </nav>
+
+    <!--본문 내용-->
     <div class="container">
         <div id="quiz">
             <p id="question"></p>
@@ -170,6 +186,7 @@
         </div>
     </div>
 
+    <!--본문 내용-->
     <script>
         let currentQuestion = 0;
         let userAnswers = [];
@@ -194,7 +211,7 @@
                     "no": [
                         {
                             title: "아바타",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20180518_218%2F1526609377997LxLgL_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20180518_218%2F1526609377997LxLgL_JPEG%2Fmovie_image.jpg",
                             cast: ["샘 워싱턴", "조 샐다나", "시고니 위버"],
                             link: "https://youtube.com/watch?v=vg_SfVAIytk"
                         }
@@ -204,17 +221,17 @@
                     "yes": [
                         {
                             title: "호텔 뭄바이",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20190415_275%2F1555310081472MmN8D_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190415_275%2F1555310081472MmN8D_JPEG%2Fmovie_image.jpg",
                             cast: ["데브 파텔", "아미 해머", "나자닌 보니아디"],
                             link: "https://www.youtube.com/watch?v=pkoFwyESk44"  
                         }
                     ],
                     "no": [
                         {
-                            title: "퇴마전: 마령검의 비밀",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20150821_200%2F1440143971670JajTs_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
-                            cast: ["리빙빙", "천쿤", "조문선"],
-                            link: "https://tv.naver.com/v/499060"
+                            title: "위 워 솔저스",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_61%2F1324489295602GCQb9_JPEG%2Fmovie_image.jpg",
+                            cast: ["멜 깁슨", "매들린 스토우", "그렉 키니어"],
+                            link: "https://www.youtube.com/watch?v=QXJFKDn_Lhc"
                         }
                     ]
                 },
@@ -222,7 +239,7 @@
                     "yes": [
                         {
                             title: "겟 아웃",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20170512_76%2F1494564316131VmHQY_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20170512_76%2F1494564316131VmHQY_JPEG%2Fmovie_image.jpg",
                             cast: ["다니엘 칼루야", "앨리슨 윌리암스", "브래드리 휘트포드"],
                             link: "https://www.youtube.com/watch?v=5-H7DpEBZGo"
                         }
@@ -230,7 +247,7 @@
                     "no": [
                         {
                             title: "사일런트 힐",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111221_101%2F1324458899453nsEUH_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111221_101%2F1324458899453nsEUH_JPEG%2Fmovie_image.jpg",
                             cast: ["라다 마첼", "로리 홀든", "숀 빈"],
                             link: "https://www.youtube.com/watch?v=0ECw3ZCrZ_U"
                         }
@@ -240,7 +257,7 @@
                     "yes": [
                         {
                             title: "인사이드 아웃",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20150714_216%2F14368354197498c2rS_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20150714_216%2F14368354197498c2rS_JPEG%2Fmovie_image.jpg",
                             cast: ["에이미 포엘러", "필리스 스미스", "민디 캘링"],
                             link: "https://www.youtube.com/watch?v=1KGZtWbZtq8"
                         }
@@ -248,7 +265,7 @@
                     "no": [
                         {
                             title: "캐치 미 이프 유 캔",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111223_268%2F1324578798861g8uPt_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111223_268%2F1324578798861g8uPt_JPEG%2Fmovie_image.jpg",
                             cast: ["레오나르도 디카프리오", "톰 행크스", "크리스토퍼 월켄"],
                             link: "https://tv.naver.com/v/5685332"
                         }
@@ -258,7 +275,7 @@
                     "yes": [
                         {
                             title: "라라랜드",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20201229_146%2F1609226288425JgdsP_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201229_146%2F1609226288425JgdsP_JPEG%2Fmovie_image.jpg",
                             cast: ["라이언 고슬링", "엠마 스톤", "존 레전드"],
                             link: "https://www.youtube.com/watch?v=Dt5hFexM5BI"
                         }
@@ -266,7 +283,7 @@
                     "no": [
                         {
                             title: "노트북",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20201102_233%2F1604294237347ur4pS_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20201102_233%2F1604294237347ur4pS_JPEG%2Fmovie_image.jpg",
                             cast: ["라이언 고슬링", "레이첼 맥 아담스", "제나 로우랜즈"],
                             link: "https://www.youtube.com/watch?v=AF4IzD6aVU4"
                         }
@@ -276,7 +293,7 @@
                     "yes": [
                         {
                             title: "인셉션",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20230405_194%2F1680663356900xqi3A_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20230405_194%2F1680663356900xqi3A_JPEG%2Fmovie_image.jpg",
                             cast: ["레오나르도 디카프리오", "와타나베 켄", "조셉 고든 레빗"],
                             link: "https://youtube.com/watch?v=mucmHmjU9YE"
                         }
@@ -284,7 +301,7 @@
                     "no": [
                         {
                             title: "우주전쟁",
-                            poster: "https://search.pstatic.net/common?type=o&size=176x264&quality=85&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20111222_113%2F1324507054744va9qe_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_113%2F1324507054744va9qe_JPEG%2Fmovie_image.jpg",
                             cast: ["톰 크루즈", "저스틴 채트윈", "다코타 패닝"],
                             link: "https://www.youtube.com/watch?v=dqOvTctDUYs"
                         }
@@ -296,7 +313,7 @@
                     "yes": [
                         {
                             title: "부산행",
-                            poster: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20160716_172%2Fbonvelyyy_14686416582362RiDM_JPEG%2F%25BA%25CE%25BB%25EA%25C7%25E0-1.jpg&type=sc960_832",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20200612_248%2F1591937633750Vvyr6_JPEG%2Fmovie_image.jpg",
                             cast: ["공유", "정유미", "마동석"],
                             link: "https://www.youtube.com/watch?v=UOTOjA0ngmk"
                         }
@@ -304,7 +321,7 @@
                     "no": [
                         {
                             title: "올드보이",
-                            poster: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA0MTdfOTAg%2FMDAxNjE4NjQxMTUzMzE2.i_qJoCDhwugTiKVyCLEslk9jzDMaMkRewxMk0vRL3vcg.6Za2WwHN3GEFVfSRrGwSmIgc9CMBsA7jd2He6MQNrisg.JPEG.pjw3146%2F%25BF%25C3%25B5%25E5%25BA%25B8%25C0%25CC.jpg&type=sc960_832",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_112%2F13245370851392Ybtg_JPEG%2Fmovie_image.jpg",
                             cast: ["최민식", "유지태", "강혜정"],
                             link: "https://www.youtube.com/watch?v=2sw4svjRe_I"
                         }
@@ -329,20 +346,76 @@
                     ]
                 },
                 "공포": {
-                    "yes": ["국내공포2020"],
-                    "no": ["국내공포2000"]
+                    "yes": [
+                        {
+                            title: "곡성",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20160425_165%2F1461560165179gYQ0g_JPEG%2Fmovie_image.jpg",
+                            cast: ["곽도원", "황정민", "천우희"],
+                            link: "https://www.youtube.com/watch?v=Ej25zrnaTXk"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "장화, 홍련",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111222_21%2F1324536158982tdOto_JPEG%2Fmovie_image.jpg",
+                            cast: ["임수정", "염정아", "김갑수"],
+                            link: "https://www.youtube.com/watch?v=lPSJ793U5Io"
+                        }
+                    ]
                 },
                 "코미디": {
-                    "yes": ["국내코미디2020"],
-                    "no": ["국내코미디2000"]
+                    "yes": [
+                        {
+                            title: "극한직업",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190116_206%2F1547615429111dINWj_JPEG%2Fmovie_image.jpg",
+                            cast: ["류승룡", "이하늬", "진선규"],
+                            link: "https://www.youtube.com/watch?v=-OvSJ4_zc2c"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "헬로우 고스트",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111223_34%2F13246299046080kAgY_JPEG%2Fmovie_image.jpg",
+                            cast: ["차태현", "강예원", "이문수"],
+                            link: "https://www.youtube.com/watch?v=HOR7laRKM-c"
+                        }
+                    ]
                 },
                 "드라마": {
-                    "yes": ["국내드라마2020"],
-                    "no": ["국내드라마2000"]
+                    "yes": [
+                        {
+                            title: "광해, 왕이 된 남자",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20121018_114%2F13505269047497LGt6_JPEG%2Fmovie_image.jpg",
+                            cast: ["이병헌", "류승룡", "한효주"],
+                            link: "https://www.youtube.com/watch?v=E-LkaQgj0qM"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "집으로...",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20190805_26%2F1564994340344jQru8_JPEG%2Fmovie_image.jpg",
+                            cast: ["김을분", "유승호"],
+                            link: "https://www.youtube.com/watch?v=m59oZO2s3pE"
+                        }
+                    ]
                 },
                 "SF": {
-                    "yes": ["국내SF 2020"],
-                    "no": ["국내SF 2000"]
+                    "yes": [
+                        {
+                            title: "설국열차",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20130610_131%2F1370829667952NUsHp_JPEG%2Fmovie_image.jpg",
+                            cast: ["송강호", "크리스 에반스", "에드 해리스"],
+                            link: "https://www.youtube.com/watch?v=xVh3bh0N68Q"
+                        }
+                    ],
+                    "no": [
+                        {
+                            title: "괴물",
+                            poster: "https://search.pstatic.net/common?quality=75&direct=true&src=https%3A%2F%2Fmovie-phinf.pstatic.net%2F20111223_39%2F1324570929423jGaQ1_JPEG%2Fmovie_image.jpg",
+                            cast: ["송강호", "변희봉", "박해일"],
+                            link: "https://www.youtube.com/watch?v=Iv9J8CqvhkM"
+                        }
+                    ]
                 }
             }
         };
@@ -464,7 +537,7 @@
                 <${selectedMovie.title}> <br>
                 출연진: ${selectedMovie.cast.join(", ")} <br>
                 <a href="${selectedMovie.link}" target="_blank">
-                <img src="${selectedMovie.poster}" width="400px"></a>
+                <img class="posterimg" src="${selectedMovie.poster}" width="400px"></a>
             `;
 
             return movieInfo;
