@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<style>
+            body{
+                background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBP6v-xTdW0i7JOjjgrU9uz_jPpFIT6rQyCw&usqp=CAU");
+                margin-top: 15%;
+            }
+            .login-form {
+                width: 300px;
+                margin: 0 auto;
+                font-family: Tahoma, Geneva, sans-serif;
+            }
+            .login-form h1 {
+                text-align: center;
+                color: #4d4d4d;
+                font-size: 24px;
+                padding: 20px 0 20px 0;
+            }
+            .login-form input[type="password"],
+            .login-form input[type="text"] {
+                width: 100%;
+                padding: 15px;
+                border: 1px solid #dddddd;
+                margin-bottom: 15px;
+                box-sizing:border-box;
+            }
+            .login-form input[type="submit"] {
+                width: 100%;
+                padding: 15px;
+                background-color: #5858FA;
+                border: 0;
+                box-sizing: border-box;
+                cursor: pointer;
+                font-weight: bold;
+                color: #ffffff;
+            }
+            button {
+                width: 100%;
+                padding: 15px;
+                background-color: #5858FA;
+                border: 0;
+                box-sizing: border-box;
+                cursor: pointer;
+                font-weight: bold;
+                color: #ffffff;
+            }
+		</style>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <!-- 로그인 관련 스크립트 -->
+        <script>
+            function handleLoginSuccess(username) {
+                console.log('handleLoginSuccess called with username:', username);
+                document.getElementById('userStatus').textContent = '안녕하세요, ' + username + '님!';
+                window.location.href = '/main/index.html';
+            }
+
+            function loginUser(username, password) {
+                $.post('/login', { username: username, password: password })
+                    .done(function(data) {
+                        // 로그인 성공 시 JSON 응답을 받아서 사용자명을 업데이트
+                        handleLoginSuccess(data.username);
+
+                        // 동시에 홈 페이지로 리다이렉트
+                        window.location.href = '/main/index.html';
+                    })
+                    .fail(function() {
+                        // 로그인 실패 처리
+                        alert('로그인 실패');
+                    });
+            }
+        </script>
+	</head>
+	<body>
+		<div class="login-form">
+			<h1>로그인</h1>
+			<form action="/login" method="POST">
+				<input type="text" name="username" placeholder="ID" required>
+				<input type="password" name="password" placeholder="비밀번호" required>
+				<input type="submit" value="로그인">
+			</form>
+			<p>
+			<a href="/register"><button>회원가입</button></a>
+			<p>
+            <a href="/"><button>홈으로</button></a>
+		</div>
+	</body>
+</html>
